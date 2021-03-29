@@ -17,7 +17,7 @@ namespace workshop.Tests
             return totalCost; 
         }
 
-        public void AddProduct(Product product)
+        internal void AddProduct(Product product)
         {
             products.Add(product);
         }
