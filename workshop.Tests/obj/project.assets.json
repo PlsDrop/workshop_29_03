@@ -1648,6 +1648,16 @@
         "build": {
           "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
+      },
+      "workshop/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/workshop.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/workshop.dll": {}
+        }
       }
     }
   },
@@ -5611,12 +5621,18 @@
         "xunit.runner.visualstudio.2.4.3.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "workshop/1.0.0": {
+      "type": "project",
+      "path": "../workshop/workshop.csproj",
+      "msbuildProject": "../workshop/workshop.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Microsoft.NET.Test.Sdk >= 16.7.1",
       "coverlet.collector >= 1.3.0",
+      "workshop >= 1.0.0",
       "xunit >= 2.4.1",
       "xunit.runner.visualstudio >= 2.4.3"
     ]
@@ -5645,7 +5661,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/intern/Desktop/workshop_29_03/workshop/workshop.csproj": {
+              "projectPath": "/home/intern/Desktop/workshop_29_03/workshop/workshop.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

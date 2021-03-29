@@ -2,13 +2,13 @@ namespace workshop.Tests
 {
     public class Product
     {
-        private int v1;
-        private string v2;
+        public int price;
+        public string name;
 
-        public Product(int v1, string v2)
+        public Product(int price, string name)
         {
-            this.v1 = v1;
-            this.v2 = v2;
+            this.price = price;
+            this.name = name;
         }
     }
 }

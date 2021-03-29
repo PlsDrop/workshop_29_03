@@ -1,1 +1,4 @@
-/.vscode
+/workshop/bin
+/workshop/obj
+/workshop.Tests/bin
+/workshop.Tests/obj

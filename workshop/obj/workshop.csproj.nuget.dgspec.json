@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/intern/Desktop/workshop/workshop.csproj": {}
+    "/home/intern/Desktop/workshop_29_03/workshop/workshop.csproj": {}
   },
   "projects": {
-    "/home/intern/Desktop/workshop/workshop.csproj": {
+    "/home/intern/Desktop/workshop_29_03/workshop/workshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/intern/Desktop/workshop/workshop.csproj",
+        "projectUniqueName": "/home/intern/Desktop/workshop_29_03/workshop/workshop.csproj",
         "projectName": "workshop",
-        "projectPath": "/home/intern/Desktop/workshop/workshop.csproj",
+        "projectPath": "/home/intern/Desktop/workshop_29_03/workshop/workshop.csproj",
         "packagesPath": "/home/intern/.nuget/packages/",
-        "outputPath": "/home/intern/Desktop/workshop/obj/",
+        "outputPath": "/home/intern/Desktop/workshop_29_03/workshop/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/intern/.nuget/NuGet/NuGet.Config"
