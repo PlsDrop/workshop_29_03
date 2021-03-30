@@ -45,5 +45,18 @@ namespace workshop
             }
             return costByCategory;
         }
+
+        internal int GetCostByTM(TM tm) 
+        {
+            int costByTM = 0;
+            foreach (Product product in products)
+            {
+                if (product.tm == tm)
+                {
+                    costByTM += product.price;
+                }
+            }
+            return costByTM;
+        }
     }
 }

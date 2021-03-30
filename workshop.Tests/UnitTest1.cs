@@ -14,8 +14,8 @@ public class CheckoutServiceTest
         checkoutService = new CheckoutService();
         checkoutService.OpenCheck();
 
-        milk_7 = new Product(7, "Milk", Category.MILK);
-        bread_3 = new Product(3, "Bread");
+        milk_7 = new Product(7, "Milk", TM.PROSTOKWASHINO, Category.MILK);
+        bread_3 = new Product(3, "Bread", TM.HLEBOBULOCHNAYA);
     }
 
     [Fact]
@@ -120,5 +120,19 @@ public class CheckoutServiceTest
 
         Assert.Equal(17, check.GetTotalPoints());
     }
+    [Fact]
+    void UseOffer_FactorByTM() 
+    {
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(bread_3);
+
+        checkoutService.UseOffer(new FactorByTradeMarkOffer(TM.PROSTOKWASHINO, 2));
+        Check check = checkoutService.CloseCheck();
+
+        Assert.Equal(31, check.GetTotalPoints());
+    }
+
+
     
 }
