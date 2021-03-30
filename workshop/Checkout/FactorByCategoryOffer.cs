@@ -1,19 +1,35 @@
 using System;
 using System.Collections.Generic;
 
-public class FactorByCategoryOffer : Offer 
+namespace workshop
 {
-    public readonly Category category;
-    public readonly int factor;
-
-    public FactorByCategoryOffer(Category category, int factor) 
+    public class FactorByCategoryOffer : Offer 
     {
-        this.category = category;
-        this.factor = factor;
-    }
+        internal readonly Category category;
+        internal readonly int factor;
 
-    public override void Apply(Check check)
-    {
+        public FactorByCategoryOffer(Category category, int factor, DateTime expireDade) 
+        {
+            this.category = category;
+            this.factor = factor;
+            this.expireDate = expireDade;
+        }
 
+        public FactorByCategoryOffer(Category category, int factor) 
+        {
+            this.category = category;
+            this.factor = factor;
+            this.expireDate = DateTime.MaxValue;
+        }
+        
+
+        public override void Apply(Check check)
+        {
+            if (expireDate > DateTime.Today)
+            {
+                int points = check.GetCostByCategory(category);
+                check.AddPoints(points * (factor - 1));
+            }
+        }
     }
 }

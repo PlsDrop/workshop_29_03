@@ -1,21 +1,24 @@
 using System;
 using System.Collections.Generic;
 
-public class Product 
+namespace workshop
 {
-    public readonly int price;
-    public readonly String name;
-    public Category category;
-
-    public Product(int price, String name, Category category) 
+    public class Product 
     {
-        this.price = price;
-        this.name = name; 
-        this.category = category;
-    }
+        internal readonly int price;
+        internal readonly String name;
+        internal readonly Category category;
 
-    public Product(int price, String name) {
-        this.price = price;
-        this.name = name;
+        public Product(int price, String name, Category category) 
+        {
+            this.price = price;
+            this.name = name; 
+            this.category = category;
+        }
+
+        public Product(int price, String name) {
+            this.price = price;
+            this.name = name;
+        }
     }
 }

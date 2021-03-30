@@ -1,46 +1,49 @@
 using System;
 using System.Collections.Generic;
 
-public class Check 
+namespace workshop
 {
-    private List<Product> products = new List<Product>();
-    private int points = 0;
-
-    public int GetTotalCost() 
+    public class Check 
     {
-        int totalCost = 0;
-        foreach (Product product in this.products) 
+        private List<Product> products = new List<Product>();
+        private int points = 0;
+
+        public int GetTotalCost() 
         {
-            totalCost += product.price;
-        }
-        return totalCost;
-    }
-
-    internal void AddProduct(Product product) 
-    {
-        products.Add(product);
-    }
-
-    public int GetTotalPoints() 
-    {
-        return GetTotalCost() + points;
-    }
-
-    internal void AddPoints(int points) 
-    {
-        this.points += points;
-    }
-
-    internal int GetCostByCategory(Category category) 
-    {
-        int costByCategory = 0;
-        foreach (Product product in products)
-        {
-            if (product.category == category)
+            int totalCost = 0;
+            foreach (Product product in this.products) 
             {
-                costByCategory += product.price;
+                totalCost += product.price;
             }
+            return totalCost;
         }
-        return costByCategory;
+
+        internal void AddProduct(Product product) 
+        {
+            products.Add(product);
+        }
+
+        public int GetTotalPoints() 
+        {
+            return GetTotalCost() + points;
+        }
+
+        internal void AddPoints(int points) 
+        {
+            this.points += points;
+        }
+
+        internal int GetCostByCategory(Category category) 
+        {
+            int costByCategory = 0;
+            foreach (Product product in products)
+            {
+                if (product.category == category)
+                {
+                    costByCategory += product.price;
+                }
+            }
+            return costByCategory;
+        }
     }
 }

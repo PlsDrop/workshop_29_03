@@ -1,5 +1,10 @@
+using System;
 
-public abstract class Offer 
+namespace workshop
 {
-    public abstract void Apply(Check check);
+    public abstract class Offer 
+    {
+        public DateTime expireDate; 
+        public abstract void Apply(Check check);
+    }
 }

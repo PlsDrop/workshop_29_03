@@ -1,6 +1,6 @@
 using System;
 using Xunit;
-
+using workshop;
 
 public class CheckoutServiceTest 
 {
@@ -19,7 +19,8 @@ public class CheckoutServiceTest
     }
 
     [Fact]
-    void CloseCheck_WithOneProduct() {
+    void CloseCheck_WithOneProduct() 
+    {
         checkoutService.AddProduct(milk_7);
         Check check = checkoutService.CloseCheck();
 
@@ -27,7 +28,8 @@ public class CheckoutServiceTest
     }
 
     [Fact]
-    void CloseCheck_WithTwoProducts() {
+    void CloseCheck_WithTwoProducts() 
+    {
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(bread_3);
         Check check = checkoutService.CloseCheck();
@@ -36,7 +38,8 @@ public class CheckoutServiceTest
     }
 
     [Fact]
-    void AddProduct_WhenCheckIsClosed_OpensNewCheck() {
+    void AddProduct_WhenCheckIsClosed_OpensNewCheck() 
+    {
         checkoutService.AddProduct(milk_7);
         Check milkCheck = checkoutService.CloseCheck();
         Assert.Equal(7, milkCheck.GetTotalCost());
@@ -47,7 +50,8 @@ public class CheckoutServiceTest
     }
 
     [Fact]
-    void CloseCheck_CalcTotalPoints() {
+    void CloseCheck_CalcTotalPoints() 
+    {
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(bread_3);
         Check check = checkoutService.CloseCheck();
@@ -56,7 +60,8 @@ public class CheckoutServiceTest
     }
 
     [Fact]
-    void UseOffer_AddOfferPoints() {
+    void UseOffer_AddOfferPoints() 
+    {
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(bread_3);
 
@@ -67,7 +72,8 @@ public class CheckoutServiceTest
     }
 
     [Fact]
-    void UseOffer_WhenCostLessThanRequired_DoNothing() {
+    void UseOffer_WhenCostLessThanRequired_DoNothing() 
+    {
         checkoutService.AddProduct(bread_3);
 
         checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
@@ -77,7 +83,8 @@ public class CheckoutServiceTest
     }
 
     [Fact]
-    void UseOffer_FactorByCategory() {
+    void UseOffer_FactorByCategory() 
+    {
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(bread_3);
@@ -87,4 +94,31 @@ public class CheckoutServiceTest
 
         Assert.Equal(31, check.GetTotalPoints());
     }
+
+    [Fact]
+    void UseNotExpiredOffer_FactorByCategory() 
+    {
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(bread_3);
+
+        checkoutService.UseOffer(new FactorByCategoryOffer(Category.MILK, 2, new DateTime(2024,1,1)));
+        Check check = checkoutService.CloseCheck();
+
+        Assert.Equal(31, check.GetTotalPoints());
+    }
+
+    [Fact]
+    void UseExpiredOffer_FactorByCategory() 
+    {
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(bread_3);
+
+        checkoutService.UseOffer(new FactorByCategoryOffer(Category.MILK, 2, new DateTime(1992)));
+        Check check = checkoutService.CloseCheck();
+
+        Assert.Equal(17, check.GetTotalPoints());
+    }
+    
 }

@@ -1,49 +1,37 @@
 using System;
 using System.Collections.Generic;
 
-public class CheckoutService 
+namespace workshop
 {
-
-    private Check check;
-
-    public void OpenCheck() 
+    public class CheckoutService 
     {
-        check = new Check();
-    }
 
-    public void AddProduct(Product product) 
-    {
-        if (check == null) 
+        private Check check;
+
+        public void OpenCheck() 
         {
-            OpenCheck();
+            check = new Check();
         }
-        check.AddProduct(product);
-    }
 
-    public Check CloseCheck() 
-    {
-        Check closedCheck = check;
-        check = null;
-        return closedCheck;
-    }
-
-    public void UseOffer(Offer offer) 
-    {
-        offer.Apply(check);
-        if (offer is FactorByCategoryOffer) 
+        public void AddProduct(Product product) 
         {
-            FactorByCategoryOffer fbOffer = (FactorByCategoryOffer) offer;
-            int points = check.GetCostByCategory(fbOffer.category);
-            check.AddPoints(points * (fbOffer.factor - 1));
-        } 
-        else 
-        {
-            if (offer is AnyGoodsOffer) 
+            if (check == null) 
             {
-                AnyGoodsOffer agOffer = (AnyGoodsOffer) offer;
-                if (agOffer.totalCost <= check.GetTotalCost())
-                    check.AddPoints(agOffer.points);
+                OpenCheck();
             }
+            check.AddProduct(product);
+        }
+
+        public Check CloseCheck() 
+        {
+            Check closedCheck = check;
+            check = null;
+            return closedCheck;
+        }
+
+        public void UseOffer(Offer offer) 
+        {
+            offer.Apply(check);
         }
     }
 }

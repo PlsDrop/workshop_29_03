@@ -1,19 +1,31 @@
 using System;
 using System.Collections.Generic;
 
-public class AnyGoodsOffer : Offer 
+namespace workshop
 {
-    public readonly int totalCost;
-    public readonly int points;
-
-    public AnyGoodsOffer(int totalCost, int points) 
+    public class AnyGoodsOffer : Offer 
     {
-        this.totalCost = totalCost;
-        this.points = points;
-    }
+        internal readonly int totalCost;
+        internal readonly int points;
 
-    public override void Apply(Check check) 
-    {
+        public AnyGoodsOffer(int totalCost, int points, DateTime expireDate) 
+        {
+            this.totalCost = totalCost;
+            this.points = points;
+            this.expireDate = expireDate;
+        }
 
+        public AnyGoodsOffer(int totalCost, int points) 
+        {
+            this.totalCost = totalCost;
+            this.points = points;
+            this.expireDate = DateTime.MaxValue;
+        }
+
+        public override void Apply(Check check) 
+        {
+            if ((expireDate > DateTime.Today) && (totalCost <= check.GetTotalCost()))
+                check.AddPoints(points);
+        }
     }
 }

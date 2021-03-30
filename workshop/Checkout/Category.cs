@@ -1,5 +1,8 @@
-
-public enum Category 
+namespace workshop
 {
-    MILK
+    public enum Category 
+    {
+        NULL,
+        MILK
+    }
 }
