@@ -1,25 +1,46 @@
 using System;
 using System.Collections.Generic;
 
-namespace workshop.Tests
+public class Check 
 {
-    public class Check
+    private List<Product> products = new List<Product>();
+    private int points = 0;
+
+    public int GetTotalCost() 
     {
-        private List<Product> products = new List<Product>();
-
-        public int GetTotalCost()
+        int totalCost = 0;
+        foreach (Product product in this.products) 
         {
-            int totalCost = 0;
-            foreach (Product product in this.products)
+            totalCost += product.price;
+        }
+        return totalCost;
+    }
+
+    internal void AddProduct(Product product) 
+    {
+        products.Add(product);
+    }
+
+    public int GetTotalPoints() 
+    {
+        return GetTotalCost() + points;
+    }
+
+    internal void AddPoints(int points) 
+    {
+        this.points += points;
+    }
+
+    internal int GetCostByCategory(Category category) 
+    {
+        int costByCategory = 0;
+        foreach (Product product in products)
+        {
+            if (product.category == category)
             {
-                totalCost += product.price;
+                costByCategory += product.price;
             }
-            return totalCost; 
         }
-
-        internal void AddProduct(Product product)
-        {
-            products.Add(product);
-        }
+        return costByCategory;
     }
 }
