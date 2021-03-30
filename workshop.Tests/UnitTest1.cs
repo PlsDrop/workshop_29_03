@@ -132,7 +132,20 @@ public class CheckoutServiceTest
 
         Assert.Equal(31, check.GetTotalPoints());
     }
+    [Fact]
+    void UseAllOffers() 
+    {
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(milk_7);
+        checkoutService.AddProduct(bread_3);
 
+        checkoutService.UseOffer(new FactorByTradeMarkOffer(TM.PROSTOKWASHINO, 2));
+        checkoutService.UseOffer(new FactorByCategoryOffer(Category.MILK, 2));
+        checkoutService.UseOffer(new AnyGoodsOffer(10, 2));
+        Check check = checkoutService.CloseCheck();
+
+        Assert.Equal(47, check.GetTotalPoints());
+    }
 
     
 }
