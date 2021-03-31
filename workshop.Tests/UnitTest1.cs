@@ -59,7 +59,7 @@ public class CheckoutServiceTest
         Assert.Equal(10, check.GetTotalPoints());
     }
 
-    [Fact]
+    /* [Fact]
     void UseOffer_AddOfferPoints() 
     {
         checkoutService.AddProduct(milk_7);
@@ -69,9 +69,9 @@ public class CheckoutServiceTest
         Check check = checkoutService.CloseCheck();
 
         Assert.Equal(12, check.GetTotalPoints());
-    }
+    } */
 
-    [Fact]
+    /* [Fact]
     void UseOffer_WhenCostLessThanRequired_DoNothing() 
     {
         checkoutService.AddProduct(bread_3);
@@ -80,72 +80,59 @@ public class CheckoutServiceTest
         Check check = checkoutService.CloseCheck();
 
         Assert.Equal(3, check.GetTotalPoints());
-    }
+    } */
 
+  
     [Fact]
-    void UseOffer_FactorByCategory() 
+    void UseBonusOffer()
     {
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(bread_3);
 
-        checkoutService.UseOffer(new FactorByCategoryOffer(Category.MILK, 2));
+        checkoutService.UseOffer(new BonusOffer(new DateTime(2023,01,02), new ByCategory(Category.BREAD), new FlatReward(40)));
         Check check = checkoutService.CloseCheck();
 
-        Assert.Equal(31, check.GetTotalPoints());
+        Assert.Equal(57, check.GetTotalPoints());
     }
-
+        
     [Fact]
-    void UseNotExpiredOffer_FactorByCategory() 
+    void UseDiscountOffer()
     {
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(bread_3);
 
-        checkoutService.UseOffer(new FactorByCategoryOffer(Category.MILK, 2, new DateTime(2024,1,1)));
+        checkoutService.UseOffer(new DiscountOffer(new DateTime(2023,01,02), new ByTradeMark(TM.PROSTOKWASHINO), new PercentDiscount(50)));
         Check check = checkoutService.CloseCheck();
 
-        Assert.Equal(31, check.GetTotalPoints());
+        Assert.Equal(11, check.GetTotalPoints());
     }
 
     [Fact]
-    void UseExpiredOffer_FactorByCategory() 
+    void UseExpiredOffer() 
     {
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(milk_7);
         checkoutService.AddProduct(bread_3);
 
-        checkoutService.UseOffer(new FactorByCategoryOffer(Category.MILK, 2, new DateTime(1992)));
+        checkoutService.UseOffer(new BonusOffer(new DateTime(2020,01,02), new ByCategory(Category.BREAD), new FlatReward(40)));
         Check check = checkoutService.CloseCheck();
 
         Assert.Equal(17, check.GetTotalPoints());
     }
-    [Fact]
-    void UseOffer_FactorByTM() 
-    {
-        checkoutService.AddProduct(milk_7);
-        checkoutService.AddProduct(milk_7);
-        checkoutService.AddProduct(bread_3);
 
-        checkoutService.UseOffer(new FactorByTradeMarkOffer(TM.PROSTOKWASHINO, 2));
-        Check check = checkoutService.CloseCheck();
 
-        Assert.Equal(31, check.GetTotalPoints());
-    }
-    [Fact]
-    void UseAllOffers() 
-    {
-        checkoutService.AddProduct(milk_7);
-        checkoutService.AddProduct(milk_7);
-        checkoutService.AddProduct(bread_3);
 
-        checkoutService.UseOffer(new FactorByTradeMarkOffer(TM.PROSTOKWASHINO, 2));
-        checkoutService.UseOffer(new FactorByCategoryOffer(Category.MILK, 2));
-        checkoutService.UseOffer(new AnyGoodsOffer(10, 2));
-        Check check = checkoutService.CloseCheck();
+    // void UseCompositeCondition()
+    // {
+    //     checkoutService.AddProduct(milk_7);
+    //     checkoutService.AddProduct(milk_7);
+    //     checkoutService.AddProduct(bread_3);
 
-        Assert.Equal(47, check.GetTotalPoints());
-    }
+    //     checkoutService.UseOffer(new BonusOffer(DateTime(2023.01.02), Composite.all(new ByCategory(Category.BREAD), new NyTrademard('HlibTaKava')), new FlatReward(40)));
+    //     Check check = checkoutService.CloseCheck();
 
-    
+    //     Assert.Equal(97, check.GetTotalPoints());
+    // }
 }

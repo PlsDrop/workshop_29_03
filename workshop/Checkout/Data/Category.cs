@@ -3,6 +3,7 @@ namespace workshop
     public enum Category 
     {
         NULL,
-        MILK
+        MILK,
+        BREAD
     }
 }
